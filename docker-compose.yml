@@ -11,6 +11,8 @@ services:
       - FLASK_ENV=production
       - PYTHONUNBUFFERED=1
     volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
       - ./configs:/app/configs
       - ./reports:/app/reports
     restart: unless-stopped

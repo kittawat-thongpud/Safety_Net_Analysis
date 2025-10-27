@@ -10,6 +10,9 @@ COPY frontend/package*.json ./
 # Install frontend dependencies
 RUN npm ci --only=production
 
+# Copy frontend source code
+COPY frontend/ ./
+
 # Build frontend for production
 RUN npm run build
 
@@ -23,7 +26,6 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy backend requirements
@@ -34,6 +36,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend source code
 COPY backend/ ./backend/
+
+# Copy built frontend from previous stage
+COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 
 # Create necessary directories
 RUN mkdir -p configs/materials configs/scenarios configs/user_configs reports
