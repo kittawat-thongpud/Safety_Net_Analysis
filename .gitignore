@@ -34,7 +34,7 @@ ENV/
 *.swp
 *.swo
 *~
-
+CLAUDE.md
 # Node.js/React
 node_modules/
 npm-debug.log*
