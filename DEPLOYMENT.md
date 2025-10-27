@@ -25,8 +25,7 @@
    ```
 
 2. **Access development servers**:
-   - Backend API: http://localhost:5000
-   - Frontend Dev Server: http://localhost:3001
+   - Backend & Frontend API: http://localhost:5000
 
 ## 🔧 Manual Deployment
 
@@ -62,7 +61,6 @@
    npm run dev
    ```
 
-   The frontend will be available at http://localhost:3000
 
 4. **Build for production**:
    ```bash
