@@ -30,21 +30,6 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
 
 ## 🐳 Quick Start with Docker
 
-### Production Deployment
-
-1. **Clone and build**:
-   ```bash
-   git clone <repository-url>
-   cd safety-net-app
-   docker-compose up --build
-   ```
-
-2. **Access the application**:
-   - Full application: http://localhost:5000
-   - API endpoints: http://localhost:5000/api
-
-## ⚡ Quick Test
-
 ### Running a Quick Analysis
 
 1. **Start the application** (if not already running):
