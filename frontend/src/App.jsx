@@ -19,6 +19,39 @@ function App() {
   useEffect(() => {
     // Load presets and materials on app start
     loadInitialData()
+
+    // Initialize with default custom configuration
+    const defaultConfig = {
+      scenario_name: "Custom Scenario",
+      material: {
+        name: "Custom Material",
+        elastic_modulus: 3.5e9,
+        yield_strength: 8.0e7,
+        density: 1150,
+        cross_section_area: 2.0e-6,
+        strain_limit: 0.1
+      },
+      geometry: {
+        net_span: 4.0,
+        num_strands: 50,
+        installation_angle: 0.0,
+        safety_factor_min: 2.0,
+        max_deflection_ratio: 0.15
+      },
+      impact: {
+        mass: 100.0,
+        fall_height: 3.0,
+        impact_velocity: Math.sqrt(2 * 9.81 * 3.0)
+      },
+      analysis: {
+        analysis_type: "impact",
+        max_iterations: 100,
+        convergence_tolerance: 1e-6,
+        include_damping: false,
+        damping_ratio: 0.05
+      }
+    }
+    setCurrentConfig(defaultConfig)
   }, [])
 
   const loadInitialData = async () => {
@@ -70,7 +103,7 @@ function App() {
           impact: {
             mass: 100.0,
             fall_height: 3.0,
-            impact_velocity: null
+            impact_velocity: Math.sqrt(2 * 9.81 * 3.0)
           },
           analysis: {
             analysis_type: "impact",
