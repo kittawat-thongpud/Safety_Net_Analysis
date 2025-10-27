@@ -13,17 +13,12 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
 
 ## 🏗️ Architecture
 
-### Backend (Flask API)
-- RESTful API for analysis operations
-- JSON configuration management
-- Mathematical analysis engine
-- Report generation system
-
-### Frontend (React)
-- Modern web interface
-- Real-time configuration forms
-- Interactive visualization dashboard
-- Report generation interface
+### All-in-One Flask Application
+- **Flask Backend**: RESTful API for analysis operations
+- **Static Frontend**: Built React frontend served as static files
+- **JSON Configuration**: Flexible material and scenario configuration system
+- **Mathematical Analysis Engine**: Core analysis based on energy conservation principles
+- **Report Generation**: Professional HTML reports with embedded visualizations
 
 ## 📊 Analysis Capabilities
 
@@ -45,18 +40,8 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
    ```
 
 2. **Access the application**:
-   Open http://localhost:5000 in your browser
-
-### Development Environment
-
-1. **Start development servers**:
-   ```bash
-   docker-compose -f docker-compose.yml up safety-net-dev
-   ```
-
-2. **Access development servers**:
-   - Backend API: http://localhost:5000
-   - Frontend Dev Server: http://localhost:3000
+   - Full application: http://localhost:5000
+   - API endpoints: http://localhost:5000/api
 
 ## ⚡ Quick Test
 
@@ -137,7 +122,9 @@ curl -X POST http://localhost:5000/api/analyze \
    python app.py
    ```
 
-### Frontend Setup
+### Frontend Setup (For Development)
+
+> **Note**: The frontend is now served as static files by Flask. For development, you can still run the frontend separately:
 
 1. **Install Node.js dependencies**:
    ```bash
@@ -145,35 +132,34 @@ curl -X POST http://localhost:5000/api/analyze \
    npm install
    ```
 
-2. **Start development server**:
+2. **Build the frontend**:
+   ```bash
+   npm run build
+   ```
+
+3. **For development with hot reloading**:
    ```bash
    npm run dev
    ```
+   Access at: http://localhost:3000
 
 ## 📁 Project Structure
 
 ```
 safety-net-app/
 ├── backend/                 # Flask API backend
-│   ├── app.py              # Main Flask application
+│   ├── app.py              # Main Flask application (serves frontend + API)
 │   ├── models.py           # Data models and configuration
 │   ├── analyzer.py         # Core analysis engine
 │   ├── report_generator.py # HTML report generation
 │   └── requirements.txt    # Python dependencies
-├── frontend/               # React frontend
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Main application pages
-│   │   ├── utils/          # API clients and utilities
-│   │   └── styles/         # CSS/styling
-│   ├── package.json
-│   └── vite.config.js
 ├── configs/                # Configuration files
 │   ├── materials/          # Material definitions
 │   ├── scenarios/          # Scenario templates
 │   └── user_configs/       # User configurations
 ├── reports/                # Generated reports
-├── Dockerfile
+├── Dockerfile              # Production Dockerfile
+├── Dockerfile.dev          # Development Dockerfile (Flask only)
 ├── docker-compose.yml
 └── README.md
 ```

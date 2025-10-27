@@ -20,26 +20,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
-  # Optional: Development environment with hot reloading
-  safety-net-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5000:5000"
-      - "3001:3000"
-    environment:
-      - FLASK_ENV=development
-      - PYTHONUNBUFFERED=1
-    volumes:
-      - ./backend:/app/backend
-      - ./frontend:/app/frontend
-      - ./configs:/app/configs
-      - ./reports:/app/reports
-    command: >
-      sh -c "
-      cd /app/backend && python app.py &
-      cd /app/frontend && npm run dev
-      "
-    restart: unless-stopped
