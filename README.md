@@ -9,16 +9,18 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
 - **Advanced Analysis**: Mathematical framework based on energy conservation principles
 - **Interactive Visualizations**: Plotly charts for force-deflection curves, stress distribution, and more
 - **Professional Reports**: HTML reports with embedded charts and recommendations
-- **Cross-platform**: Docker deployment for easy setup
+- **Client-side Processing**: All calculations performed in the browser
+- **Cloudflare Deployment**: Fast, global deployment with zero backend infrastructure
 
 ## 🏗️ Architecture
 
-### All-in-One Flask Application
-- **Flask Backend**: RESTful API for analysis operations
-- **Static Frontend**: Built React frontend served as static files
+### Pure Vite + React Application
+- **Client-side Analysis**: All calculations performed in the browser using JavaScript
+- **Static Frontend**: Built React frontend deployed to Cloudflare Pages
 - **JSON Configuration**: Flexible material and scenario configuration system
 - **Mathematical Analysis Engine**: Core analysis based on energy conservation principles
 - **Report Generation**: Professional HTML reports with embedded visualizations
+- **No Backend Required**: Zero server infrastructure needed
 
 ## 📊 Analysis Capabilities
 
@@ -28,21 +30,26 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
 - **Deflection Limits**: Verification against maximum allowable deflection
 - **Material Properties**: Support for various net materials (nylon, polyester, steel, etc.)
 
-## 🐳 Quick Start with Docker
+## 🚀 Quick Start
 
-### Running a Quick Analysis
+### Local Development
 
-1. **Start the application** (if not already running):
+1. **Install dependencies**:
    ```bash
-   docker-compose up --build
+   npm install
    ```
 
-2. **Access the web interface**:
-   Open http://localhost:5000 in your browser
+2. **Start development server**:
+   ```bash
+   npm run dev
+   ```
 
-3. **Quick test steps**:
+3. **Access the web interface**:
+   Open http://localhost:3000 in your browser
+
+4. **Quick test steps**:
    - In the **Configuration** tab:
-     - Select "Light Worker" from the "Load Preset Scenario" dropdown
+     - Select "Light Construction" from the "Load Preset Scenario" dropdown
      - Or choose "Custom Configuration" for manual setup
    - Click **🚀 Run Analysis** to perform calculations
    - Switch to **Results** tab to see safety factors and design checks
@@ -50,47 +57,22 @@ A comprehensive web-based application for analyzing the load-bearing capacity of
    - Switch to **Visualization** tab to view interactive charts
    - Click **📋 Generate Report** to download an HTML report
 
-### API Quick Test
+### Cloudflare Pages Deployment
 
-You can also test the backend API directly:
+1. **Build the application**:
+   ```bash
+   npm run build
+   ```
 
-```bash
-# Test health endpoint
-curl http://localhost:5000/health
+2. **Deploy to Cloudflare Pages**:
+   ```bash
+   npm run deploy
+   ```
 
-# Get available presets
-curl http://localhost:5000/api/config/presets
-
-# Get available materials
-curl http://localhost:5000/api/config/materials
-
-# Test analysis with sample data
-curl -X POST http://localhost:5000/api/analyze \
-  -H "Content-Type: application/json" \
-  -d '{
-    "scenario_name": "Test Analysis",
-    "material": {
-      "name": "Nylon",
-      "elastic_modulus": 3500000000.0,
-      "yield_strength": 80000000.0,
-      "density": 1150,
-      "cross_section_area": 2.0e-6,
-      "strain_limit": 0.1
-    },
-    "geometry": {
-      "net_span": 3.0,
-      "num_strands": 40,
-      "safety_factor_min": 2.5
-    },
-    "impact": {
-      "mass": 70.0,
-      "fall_height": 2.0
-    },
-    "analysis": {
-      "analysis_type": "impact"
-    }
-  }'
-```
+3. **Alternative: Deploy using Wrangler directly**:
+   ```bash
+   wrangler pages deploy dist
+   ```
 
 ## 🔧 Manual Setup
 
@@ -131,21 +113,23 @@ curl -X POST http://localhost:5000/api/analyze \
 ## 📁 Project Structure
 
 ```
-safety-net-app/
-├── backend/                 # Flask API backend
-│   ├── app.py              # Main Flask application (serves frontend + API)
-│   ├── models.py           # Data models and configuration
-│   ├── analyzer.py         # Core analysis engine
-│   ├── report_generator.py # HTML report generation
-│   └── requirements.txt    # Python dependencies
-├── configs/                # Configuration files
-│   ├── materials/          # Material definitions
-│   ├── scenarios/          # Scenario templates
-│   └── user_configs/       # User configurations
-├── reports/                # Generated reports
-├── Dockerfile              # Production Dockerfile
-├── Dockerfile.dev          # Development Dockerfile (Flask only)
-├── docker-compose.yml
+safety-net-analysis/
+├── src/                    # React application source
+│   ├── components/         # React components
+│   │   ├── ConfigurationForm.jsx
+│   │   ├── AnalysisResults.jsx
+│   │   ├── VisualizationDashboard.jsx
+│   │   ├── ReportGenerator.jsx
+│   │   └── Header.jsx
+│   ├── utils/
+│   │   └── safetyNetAnalyzer.js  # Core analysis engine (JavaScript)
+│   ├── styles/             # CSS styles
+│   ├── App.jsx             # Main React application
+│   └── main.jsx            # Application entry point
+├── dist/                   # Built application (for deployment)
+├── package.json            # Node.js dependencies and scripts
+├── vite.config.js          # Vite configuration
+├── wrangler.toml           # Cloudflare Wrangler configuration
 └── README.md
 ```
 
